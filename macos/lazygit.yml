@@ -1,4 +1,9 @@
 git:
-  paging:
-    colorArg: never
-    pager: delta --dark --paging=never
+  pagers:
+    - colorArg: never
+      pager: delta --dark --paging=never --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
+  log:
+    showGraph: when-maximised
+    showWholeGraph: false
+  gui:
+    nerdFontsVersion: "3"

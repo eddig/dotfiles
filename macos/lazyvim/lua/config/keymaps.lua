@@ -13,10 +13,6 @@ local function map(mode, lhs, rhs, opts)
   end
 end
 
-map("n", "<C-p>", "<cmd>Telescope find_files<cr>", { desc = "Find files" })
-map("n", "<C-f>", "<cmd>Telescope live_grep<cr>", { desc = "Live grep" })
-map("n", "<C-b>", "<cmd>Telescope buffers<cr>", { desc = "Buffers" })
-map("n", ",,", "<cmd>Neotree toggle<cr>", { desc = "Explorer NeoTree (toggle)" })
 map("n", "<C-n>", "<C-w><")
 map("n", "<C-m>", "<C-w>>")
 map("n", "-", "<C-w>-")

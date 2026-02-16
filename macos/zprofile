@@ -1,1 +1,9 @@
+# This file runs once when the login shell starts. The result will be shared with the other non-login shells.
+
+# Configure brew
 eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# Configure autojump
+# brew install autojump
+[ -f "/opt/homebrew/etc/profile.d/autojump.sh" ] && . "/opt/homebrew/etc/profile.d/autojump.sh"
+

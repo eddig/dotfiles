@@ -1,60 +1,18 @@
 return {
   {
-    "LazyVim/LazyVim",
-    opts = {
-      -- colorscheme = "catppuccin",
-      -- colorscheme = "gruvbox",
-      colorscheme = "tokyonight",
-    },
-  },
-  --
-  -- Tokyonight
-  --
-  {
     "folke/tokyonight.nvim",
     lazy = true,
-    opts = { style = "storm" },
+    opts = {
+      transparent = true,
+      style = "night",
+      styles = {
+        sidebars = "transparent",
+        floats = "transparent",
+      },
+      on_colors = function(colors)
+        colors.border = "#343a56"
+        colors.bg_statusline = colors.none
+      end,
+    },
   },
-  --
-  -- Gruvbox
-  --
-  -- { "ellisonleao/gruvbox.nvim", opts = { contrast = "soft" } },
-  --
-  -- Catppuccin
-  --
-  -- {
-  --   "catppuccin/nvim",
-  --   lazy = true,
-  --   name = "catppuccin",
-  --   opts = {
-  --     flavour = "macchiato", -- latte, frappe, macchiato, mocha
-  --     integrations = {
-  --       alpha = true,
-  --       cmp = true,
-  --       gitsigns = true,
-  --       illuminate = true,
-  --       indent_blankline = { enabled = true },
-  --       lsp_trouble = true,
-  --       mini = true,
-  --       native_lsp = {
-  --         enabled = true,
-  --         underlines = {
-  --           errors = { "undercurl" },
-  --           hints = { "undercurl" },
-  --           warnings = { "undercurl" },
-  --           information = { "undercurl" },
-  --         },
-  --       },
-  --       navic = { enabled = true },
-  --       neotest = true,
-  --       noice = true,
-  --       notify = true,
-  --       nvimtree = true,
-  --       semantic_tokens = true,
-  --       telescope = true,
-  --       treesitter = true,
-  --       which_key = true,
-  --     },
-  --   },
-  -- },
 }

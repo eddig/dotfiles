@@ -1,6 +1,6 @@
 [user]
-  name = Eduard Gilmutdinov
-  email = edgilmutdinov@gmail.com
+	name = Eduard Gilmutdinov
+	email = edgilmutdinov@gmail.com
   username = eddig
 [core]
   pager = delta
@@ -61,7 +61,15 @@
   rebase = true
 [diff]
   tool = nvimdiff
-  colorMoved = default
+  colorMoved = plain
   algorithm = histogram
+  mnemonicPrefix = true
+  renames = true
 [init]
   defaultBranch = main
+[column]
+	ui = auto
+[branch]
+	sort = -committerdate
+[tag]
+	sort = version:refname

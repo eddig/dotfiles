@@ -1,13 +1,4 @@
 # Configure Rust
 # https://www.rust-lang.org
-[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
-
-# Configure nvm (Node.js version manager)
-# brew install nvm
-export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
-
-# Configure autojump
-# brew install autojump
-[ -f "/opt/homebrew/etc/profile.d/autojump.sh" ] && . "/opt/homebrew/etc/profile.d/autojump.sh"
+[ -f "$HOME/.cargo/env" ] && 
+. "$HOME/.cargo/env"

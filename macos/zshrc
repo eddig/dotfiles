@@ -76,6 +76,7 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
+export PATH="/Users/eddig/.local/bin:$PATH"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # JS package manager
@@ -103,11 +104,11 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vi'
+else
+  export EDITOR='vim'
+fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -122,8 +123,10 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias vim='nvim'
+alias top='btop'
 alias ll='lsd -lah --group-dirs first'
 alias du='dua i'
+alias dig='doggo'
 alias mkdir='mkdir -pv'
 alias myip="curl http://ip-api.com/line; echo"
 alias passwords='pass show all | less; clear && tmux clear-history'
@@ -138,7 +141,15 @@ alias pn='pnpm'
 alias pnx='pnpx'
 alias lg='lazygit'
 alias gs='git status'
-alias mykill='pkill prettierd eslintd rust-analyzer node nvim'
+alias mykill='pkill nvim prettierd eslintd rust-analyzer node'
+alias claude-chat='cd ~/.claude-chat && claude'
+
+# This works with both the shell input redirection and the pipelines
+# 1. jqless < data.json
+# 2. cat data.json | jqless
+jqless() {
+    jq -C "$@" | less -R
+}
 
 # Fuzzy searcher files (fzf + ripgrep)
 # brew install fzf ripgrep
@@ -146,8 +157,10 @@ alias mykill='pkill prettierd eslintd rust-analyzer node nvim'
 # brew install fzf fd
 export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --exclude .git --exclude node_modules'
 alias fzfp="fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}' | xargs -I {} nvim {}"
+alias fzf="fzf --bind 'enter:execute($EDITOR {})'"
 
 # Get linux command cheatsheet from http://cheat.sh/
+# Usage: cheatsh curl
 cheatsh() {
   args="${*:?How to use: cheatsh bash copy with progress bar}"
   query=${args// /+}
@@ -155,36 +168,50 @@ cheatsh() {
   curl cheat.sh/$query
 }
 
-# Configure nnn
-export NNN_OPTS="do"
-export NNN_PLUG="c:fzcd;"
-export NNN_FIFO="/tmp/nnn.fifo"
+# Retreive information about provided domain.
+# Usage: domain_lookup google.com
+domain_lookup() {
+  local domain="$1"
 
-n ()
-{
-    # Block nesting of nnn in subshells
-    if [ -n $NNNLVL ] && [ "${NNNLVL:-0}" -ge 1 ]; then
-        echo "nnn is already running"
-        return
+  if [ -z "$domain" ]; then
+    echo "Usage: domain_lookup <domain>"
+    return 1
+  fi
+
+  local ip_address=$(/usr/bin/dig @1.1.1.1 +short "$domain" A | grep -E '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$' | head -n1)
+
+  if [ -z "$ip_address" ]; then
+    echo "$domain: Could not resolve"
+    return
+  fi
+
+  local asn_info=$(/usr/bin/whois -h whois.cymru.com " -v $ip_address" 2>/dev/null | tail -n1)
+
+  if [ -n "$asn_info" ]; then
+    local asn=$(echo "$asn_info" | awk '{print $1}')
+    local country=$(echo "$asn_info" | cut -d'|' -f4 | xargs)
+    local owner=$(echo "$asn_info" | cut -d'|' -f5- | xargs)
+
+    if [ -n "$asn" ] && [ "$asn" != "NA" ]; then
+      echo "$domain: $ip_address | AS$asn | $country | $owner"
+    else
+      echo "$domain: $ip_address"
     fi
-
-    # The default behaviour is to cd on quit (nnn checks if NNN_TMPFILE is set)
-    # To cd on quit only on ^G, remove the "export" as in:
-    #     NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
-    # NOTE: NNN_TMPFILE is fixed, should not be modified
-    # export NNN_TMPFILE="${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd"
-
-    # This will create a fifo where all nnn selections will be written to
-    NNN_FIFO="$(mktemp)"
-    rm "$NNN_FIFO"
-    export NNN_FIFO
-    (umask 077; mkfifo "$NNN_FIFO")
-
-    # Preview command
-    preview_cmd="~/nnn_preview_cmd.sh"
-
-    tmux new "nnn" ";" set-option -g status off ";" split -l 60% -e "NNN_FIFO=$NNN_FIFO" -dh "$preview_cmd"
-
-    rm -f "$NNN_FIFO"
+  else
+    echo "$domain: $ip_address"
+  fi
 }
 
+# Configure nnn
+export NNN_OPTS="do"
+export NNN_FIFO="/tmp/nnn.fifo"
+export NNN_PLUG="p:preview-tui;j:autojump"
+
+# Setup pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+# fnm
+eval "$(fnm env --use-on-cd --corepack-enabled --version-file-strategy recursive --shell zsh)"
