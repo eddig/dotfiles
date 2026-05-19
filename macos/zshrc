@@ -107,7 +107,7 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vi'
 else
-  export EDITOR='vim'
+  export EDITOR='nvim'
 fi
 
 # Compilation flags
@@ -130,7 +130,7 @@ alias dig='doggo'
 alias mkdir='mkdir -pv'
 alias myip="curl http://ip-api.com/line; echo"
 alias passwords='pass show all | less; clear && tmux clear-history'
-alias passwords_edit='pass edit all; clear && tmux clear-history'
+alias passwords_edit='EDITOR="vim --clean" pass edit all; clear && tmux clear-history'
 # alias passwords='gpg --decrypt ~/.passwords | less'
 # alias passwords_decrypt='gpg --output /tmp/.passwords -d ~/.passwords && vim /tmp/.passwords'
 # alias passwords_encrypt='gpg --output ~/.passwords --cipher-algo AES256 --symmetric /tmp/.passwords && rm -P /tmp/.passwords'
