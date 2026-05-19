@@ -143,6 +143,7 @@ alias lg='lazygit'
 alias gs='git status'
 alias mykill='pkill nvim prettierd eslintd rust-analyzer node'
 alias claude-chat='cd ~/.claude-chat && claude'
+alias glow='glow -w 120'
 alias y='yazi'
 
 # This works with both the shell input redirection and the pipelines
