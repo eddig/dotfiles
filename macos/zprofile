@@ -3,7 +3,7 @@
 # Configure brew
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
-# Configure autojump
-# brew install autojump
-[ -f "/opt/homebrew/etc/profile.d/autojump.sh" ] && . "/opt/homebrew/etc/profile.d/autojump.sh"
+# Configure zoxide
+# brew install zoxide
+eval "$(zoxide init --cmd j zsh)"
 
