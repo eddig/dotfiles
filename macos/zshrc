@@ -212,3 +212,6 @@ eval "$(pyenv virtualenv-init -)"
 
 # fnm
 eval "$(fnm env --use-on-cd --corepack-enabled --version-file-strategy recursive --shell zsh)"
+
+# Add docker tool when it was installed only for the current user.
+[[ -d $HOME/.docker/bin ]] && export PATH="$HOME/.docker/bin:$PATH"
