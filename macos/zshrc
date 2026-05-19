@@ -143,6 +143,7 @@ alias lg='lazygit'
 alias gs='git status'
 alias mykill='pkill nvim prettierd eslintd rust-analyzer node'
 alias claude-chat='cd ~/.claude-chat && claude'
+alias y='yazi'
 
 # This works with both the shell input redirection and the pipelines
 # 1. jqless < data.json
@@ -201,11 +202,6 @@ domain_lookup() {
     echo "$domain: $ip_address"
   fi
 }
-
-# Configure nnn
-export NNN_OPTS="do"
-export NNN_FIFO="/tmp/nnn.fifo"
-export NNN_PLUG="p:preview-tui;j:autojump"
 
 # Setup pyenv
 export PYENV_ROOT="$HOME/.pyenv"
