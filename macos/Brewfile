@@ -1,0 +1,126 @@
+tap "docker/tap"
+# Tool for reverse engineering 3rd party, closed, binary Android apps
+brew "apktool"
+# Clone of cat(1) with syntax highlighting and Git integration
+brew "bat"
+# Resource monitor. C++ version and continuation of bashtop and bpytop
+brew "btop"
+# Versatile and fast Unicode/ASCII/ANSI graphics renderer
+brew "chafa"
+# Cross-platform make
+brew "cmake"
+# Console Matrix
+brew "cmatrix"
+# Apjanke's fork of the classic cowsay project
+brew "cowsay"
+# Command-line csv viewer
+brew "csvlens"
+# Command-line tool for DigitalOcean
+brew "doctl"
+# Command-line DNS Client for Humans
+brew "doggo"
+# Convert text between DOS, UNIX, and Mac formats
+brew "dos2unix"
+# View disk space usage and delete unwanted data, fast
+brew "dua-cli"
+# Like neofetch, but much faster because written mostly in C
+brew "fastfetch"
+# Simple, fast and user-friendly alternative to find
+brew "fd"
+# Play, record, convert, and stream select audio and video codecs
+brew "ffmpeg"
+# Fast and simple Node.js version manager
+brew "fnm"
+# Command-line fuzzy finder written in Go
+brew "fzf"
+# GitHub command-line tool
+brew "gh"
+# Distributed revision control system
+brew "git"
+# Syntax-highlighting pager for git and diff output
+brew "git-delta"
+# Render markdown on the CLI
+brew "glow"
+# GNU Privacy Guard (OpenPGP)
+brew "gnupg"
+# C/C++ and Java libraries for Unicode and globalization
+brew "icu4c@76"
+# Tools and libraries to manipulate images in select formats
+brew "imagemagick"
+# Interactive JSON filter using jq
+brew "jnv"
+# Lightweight and flexible command-line JSON processor
+brew "jq"
+# Protocol buffers (Google's data interchange format)
+brew "protobuf"
+# High-performance authoritative-only DNS server
+brew "knot"
+# Simple terminal UI for git commands
+brew "lazygit"
+# Postgres C API library
+brew "libpq", link: true
+# Next-gen compiler infrastructure
+brew "llvm"
+# Clone of ls with colorful output, file type icons, and more
+brew "lsd"
+# Minimalist GNU for Windows and GCC cross-compilers
+brew "mingw-w64"
+# Ambitious Vim-fork focused on extensibility and agility
+brew "neovim"
+# Open source visual route tracking CLI tool
+brew "nexttrace"
+# Port scanning utility for large networks
+brew "nmap"
+# 7-Zip (high compression file archiver) implementation
+brew "p7zip"
+# Password manager
+brew "pass"
+# Package compiler and linker metadata toolkit
+brew "pkgconf"
+# PDF rendering library (based on the xpdf-3.0 code base)
+brew "poppler"
+# Python version management
+brew "pyenv"
+# Pyenv plugin to manage virtualenv
+brew "pyenv-virtualenv"
+# Ruby version manager
+brew "rbenv"
+# SVG rendering tool and library
+brew "resvg"
+# Search tool like grep and The Silver Searcher
+brew "ripgrep"
+# Terminal multiplexer
+brew "tmux"
+# Parser generator tool
+brew "tree-sitter-cli"
+# Executes a program periodically, showing output fullscreen
+brew "watch"
+# Internet file retriever
+brew "wget"
+# Blazing fast terminal file manager written in Rust, based on async I/O
+brew "yazi"
+# Shell extension to navigate your filesystem faster
+brew "zoxide"
+# Android SDK component
+cask "android-platform-tools"
+# Web browser
+cask "firefox@developer-edition"
+# Terminal emulator that uses platform-native UI and GPU acceleration
+cask "ghostty"
+# Build, run, and govern agents across the software development lifecycle
+cask "docker/tap/sbx"
+cargo "bacon"
+cargo "cargo-binutils"
+cargo "cargo-expand"
+cargo "cargo-generate"
+cargo "cargo-insta"
+cargo "cargo-modules"
+cargo "cross"
+cargo "glues"
+cargo "md-tui"
+cargo "miniserve"
+cargo "oha"
+cargo "probe-rs-tools"
+cargo "rustlings"
+cargo "wasm-pack"
+npm "corepack"

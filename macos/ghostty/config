@@ -1,0 +1,28 @@
+theme = tokyonight
+background-image = ~/.config/ghostty/bg.png
+background-image-opacity = 1.0
+background-image-fit = cover
+
+font-size = 13
+font-thicken = false
+font-thicken-strength = 0
+font-feature = -liga
+font-feature = -dlig
+font-feature = -calt
+
+adjust-cell-height = 1
+adjust-font-baseline = 0
+
+window-decoration = false
+window-colorspace = display-p3
+window-width = 140
+window-height = 40
+window-padding-x = 0
+window-padding-y = 0
+window-padding-balance = true
+
+macos-window-shadow = false
+macos-auto-secure-input = false
+macos-secure-input-indication = false
+
+shell-integration = none
