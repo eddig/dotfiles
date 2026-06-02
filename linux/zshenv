@@ -1,0 +1,4 @@
+# Runs on every shell invocation (login, interactive, scripts).
+
+# Rust / cargo
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"

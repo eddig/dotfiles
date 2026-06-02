@@ -1,0 +1,80 @@
+[user]
+	name = Eduard Gilmutdinov
+	email = edgilmutdinov@gmail.com
+  username = eddig
+[core]
+  pager = delta
+  editor = nvim
+  autocrlf = input
+[interactive]
+  diffFilter = delta --color-only --features=interactive
+[delta]
+  syntax-theme = none
+  commit-decoration-style = none
+  file-added-label = [+]
+  file-copied-label = [C]
+  file-decoration-style = none
+  file-modified-label = [M]
+  file-removed-label = [-]
+  file-renamed-label = [R]
+  file-style = 232 bold "#c2caf1"
+  hunk-header-decoration-style = none
+  hunk-header-file-style = "#999999"
+  hunk-header-line-number-style = bold "#03a4ff"
+  hunk-header-style = omit
+  line-numbers = true
+  line-numbers-left-style = black
+  line-numbers-right-style = black
+  line-numbers-minus-style = "#b2555b"
+  line-numbers-plus-style = "#2e8480"
+  line-numbers-zero-style = "#3b4261"
+  line-numbers-left-format = "{nm:>1}┊"
+  line-numbers-right-format = " {np:>1}┊"
+  minus-style = "#e55c72"
+  minus-non-emph-style = "#e55c72"
+  minus-emph-style = syntax "#af3842"
+  minus-empty-line-marker-style = syntax "#352d3d"
+  plus-style = "#40b9b4"
+  plus-non-emph-style = "#40b9b4"
+  plus-emph-style = syntax "#266d6a"
+  plus-empty-line-marker-style  = syntax "#266d6a"
+  whitespace-error-style = "#280050" reverse
+  zero-style = syntax
+  blame-palette = "#25263b #2a2d45 #30334e #363958 #3c3f61 #484b74 #4e517d #535887 #595e90"
+  blame-format = "{author:>18} ({commit:>8}) {timestamp:<13} "
+[alias]
+  l = log --graph --oneline --decorate
+  ll = log --graph --oneline --decorate --branches --tags
+  lll = log --graph --oneline --decorate --all
+  llll = log --date=short --pretty=format:\"%C(yellow)%h %C(cyan)%cd %C(cyan)(%cr)%Creset %s\"
+# GitHub auth handled by gh; everything else cached for an hour
+[credential "https://github.com"]
+  helper = !gh auth git-credential
+[credential "https://gist.github.com"]
+  helper = !gh auth git-credential
+[credential]
+  helper = cache --timeout=3600
+[rerere]
+  enabled = false
+[merge]
+  tool = nvimdiff
+  conflictstyle = zdiff3
+  keepbackup = false
+[push]
+  default = current
+[pull]
+  rebase = true
+[diff]
+  tool = nvimdiff
+  colorMoved = plain
+  algorithm = histogram
+  mnemonicPrefix = true
+  renames = true
+[init]
+  defaultBranch = main
+[column]
+	ui = auto
+[branch]
+	sort = -committerdate
+[tag]
+	sort = version:refname

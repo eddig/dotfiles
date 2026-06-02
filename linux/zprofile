@@ -1,0 +1,7 @@
+# Runs once when the login shell starts; exported to child non-login shells.
+
+# Homebrew on Linux (optional — only if installed)
+[ -d /home/linuxbrew/.linuxbrew ] && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+# zoxide — smarter cd, invoked as `j` (e.g. `j proj`)
+command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init --cmd j zsh)"
