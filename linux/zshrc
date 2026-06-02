@@ -59,10 +59,6 @@ alias docker_rmi_dangling='docker rmi $(docker images -q -f dangling=true)'
 alias c='claude'
 alias cc='cd ~/.claude-chat && claude'
 
-# pass — password store
-alias passwords='pass show all | less; clear && tmux clear-history'
-alias passwords_edit='EDITOR="vim --clean" pass edit all; clear && tmux clear-history'
-
 # ── Functions ────────────────────────────────────────────────────────────────
 # jqless < data.json   |   cat data.json | jqless
 jqless() {
