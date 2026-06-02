@@ -40,7 +40,10 @@ command -v doggo >/dev/null 2>&1 && alias dig='doggo'
 command -v glow  >/dev/null 2>&1 && alias glow='glow -w 120'
 command -v lazygit >/dev/null 2>&1 && alias lg='lazygit'
 command -v yazi  >/dev/null 2>&1 && alias y='yazi'
-command -v pnpm  >/dev/null 2>&1 && alias pn='pnpm' && alias pnx='pnpx'
+# pnpm comes from corepack (enabled by fnm init lower down), so define these
+# unconditionally — pnpm isn't on PATH yet at this point in the file.
+alias pn='pnpm'
+alias pnx='pnpx'
 
 alias mkdir='mkdir -pv'
 alias gs='git status'

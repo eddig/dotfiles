@@ -22,9 +22,11 @@ and kept current with `brew upgrade`).
   ca-certificates, unzip
 - **Homebrew** (Linuxbrew); its shellenv is loaded from `zprofile`
 - **brew tools**: zsh, tmux, git, neovim, ripgrep, fd, bat, fzf, zoxide, lsd,
-  git-delta, jq, btop, gh, lazygit, glow, doggo, dua-cli, yazi, and yazi's
+  git-delta, jq, btop, gh, lazygit, glow, doggo, dua-cli, yazi, yazi's
   preview helpers (ffmpeg, poppler, imagemagick — v7, so `magick` works —
-  sevenzip)
+  sevenzip), and fnm (Node version manager)
+- **Node**: latest LTS installed via fnm and set as default; corepack enabled,
+  so `pnpm`/`yarn` work out of the box
 - **login shell**: brew's zsh, also symlinked to `/usr/bin/zsh` (see note below)
 - **oh-my-zsh** + `zsh-autosuggestions` + `fast-syntax-highlighting`
 - **tmux**: TPM + plugins (tmux-sensible, tmux-resurrect)
@@ -58,5 +60,7 @@ LazyVim is wired separately (see `install.sh`): `~/.config/nvim/lua` and
   credential helper for GitHub defers to `gh`, so this is required for pushes.
 - **Nerd Font**: rendered by your *local* terminal, not the VPS — make sure the
   terminal you SSH from uses a Nerd Font so icons display.
-- **Version managers** (rbenv, pyenv, fnm, bun, pnpm): initialized lazily by
-  `zshrc` only when present; install them separately if needed.
+- **Other version managers** (rbenv, pyenv, bun): the `zshrc` initializes them
+  lazily *only when present* — not installed by default. Add via
+  `brew install rbenv pyenv pyenv-virtualenv bun` if you need them. (fnm + Node
+  are installed by `install.sh`.)

@@ -23,12 +23,14 @@ fi
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # ── brew packages (all user-facing tools) ────────────────────────────────────
+# yazi pulls ffmpeg/poppler/imagemagick/sevenzip for previews; fnm manages Node.
 log "brew packages"
 brew install \
   zsh tmux git neovim \
   ripgrep fd bat fzf zoxide lsd git-delta jq btop \
   gh lazygit glow doggo dua-cli \
-  yazi ffmpeg poppler imagemagick sevenzip   # yazi + its preview helpers
+  yazi ffmpeg poppler imagemagick sevenzip \
+  fnm
 
 # ── make brew zsh the login shell ────────────────────────────────────────────
 # IMPORTANT: also expose it at /usr/bin/zsh. Tools, PAM, and tmux's default-shell
@@ -65,6 +67,16 @@ log "linking configs"
 # ── caches + plugins ─────────────────────────────────────────────────────────
 bat cache --build >/dev/null 2>&1 || true
 "$TPM/bin/install_plugins" >/dev/null 2>&1 || true
+
+# ── Node via fnm (LTS as default; corepack provides pnpm/yarn) ────────────────
+if have fnm && ! fnm ls 2>/dev/null | grep -q lts-latest; then
+  log "Node LTS via fnm"
+  export FNM_DIR="$HOME/.local/share/fnm"
+  eval "$(fnm env)"
+  fnm install --lts
+  fnm default "$(fnm current)"
+  corepack enable 2>/dev/null || true
+fi
 
 # ── LazyVim: starter + our overlay (symlinked, so the overlay stays tracked) ──
 # Note: the full nvim dir is NOT symlinked (lazy writes lazy-lock.json there);
