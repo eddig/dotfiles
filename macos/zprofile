@@ -3,7 +3,3 @@
 # Configure brew
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
-# Configure zoxide
-# brew install zoxide
-eval "$(zoxide init --cmd j zsh)"
-

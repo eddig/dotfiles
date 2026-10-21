@@ -70,7 +70,25 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+# Add docker tool when it was installed only for the current user.
+# Must come before Oh My Zsh: the docker plugin skips setup when docker isn't on PATH.
+[[ -d $HOME/.docker/bin ]] && export PATH="$HOME/.docker/bin:$PATH"
+
+# fnm plugin: run `fnm env` on startup; fnm reads the other options from these variables
+zstyle ':omz:plugins:fnm' autostart yes
+export FNM_COREPACK_ENABLED=true
+export FNM_VERSION_FILE_STRATEGY=recursive
+
+# zoxide plugin: name of the jump command
+ZOXIDE_CMD_OVERRIDE=j
+
+# Fuzzy searcher files (fzf + fd), used by the fzf plugin
+# brew install fzf fd
+# export FZF_DEFAULT_COMMAND='rg --files --follow --hidden'
+export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --exclude .git --exclude node_modules'
+
+# zsh-syntax-highlighting must be the last plugin
+plugins=(git fnm docker fzf zoxide zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -85,15 +103,6 @@ case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
-
-# Configure Ruby environment manager
-eval "$(rbenv init - zsh)"
-
-# bun completions
-[ -s "/Users/eddig/.bun/_bun" ] && source "/Users/eddig/.bun/_bun"
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
 
 # Add the SSH identity files to the ssh-agent
 # ssh-add --apple-load-keychain
@@ -154,11 +163,6 @@ jqless() {
     jq -C "$@" | less -R
 }
 
-# Fuzzy searcher files (fzf + ripgrep)
-# brew install fzf ripgrep
-# export FZF_DEFAULT_COMMAND='rg --files --follow --hidden'
-# brew install fzf fd
-export FZF_DEFAULT_COMMAND='fd --type file --follow --hidden --exclude .git --exclude node_modules'
 alias fzfp="fzf --preview 'bat --color=always --style=numbers --line-range=:500 {}' | xargs -I {} nvim {}"
 alias fzf="fzf --bind 'enter:execute($EDITOR {})'"
 
@@ -204,15 +208,3 @@ domain_lookup() {
     echo "$domain: $ip_address"
   fi
 }
-
-# Setup pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-
-# fnm
-eval "$(fnm env --use-on-cd --corepack-enabled --version-file-strategy recursive --shell zsh)"
-
-# Add docker tool when it was installed only for the current user.
-[[ -d $HOME/.docker/bin ]] && export PATH="$HOME/.docker/bin:$PATH"
