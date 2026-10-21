@@ -70,6 +70,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
+
 # Add docker tool when it was installed only for the current user.
 # Must come before Oh My Zsh: the docker plugin skips setup when docker isn't on PATH.
 [[ -d $HOME/.docker/bin ]] && export PATH="$HOME/.docker/bin:$PATH"
@@ -144,7 +145,6 @@ alias passwords_edit='EDITOR="vim --clean" pass edit all; clear && tmux clear-hi
 # alias passwords_decrypt='gpg --output /tmp/.passwords -d ~/.passwords && vim /tmp/.passwords'
 # alias passwords_encrypt='gpg --output ~/.passwords --cipher-algo AES256 --symmetric /tmp/.passwords && rm -P /tmp/.passwords'
 alias docker_rmi_dangling='docker rmi $(docker images -q -f dangling=true)'
-alias screenfetch='neofetch'
 alias cpsafe='rsync -av --progress --exclude node_modules --exclude .git'
 alias pn='pnpm'
 alias pnx='pnpx'
@@ -152,7 +152,6 @@ alias lg='lazygit'
 alias gs='git status'
 alias mykill='pkill nvim prettierd eslintd rust-analyzer node'
 alias cc='cd ~/.claude-chat && claude'
-alias c='claude'
 alias glow='glow -w 120'
 alias y='yazi'
 
