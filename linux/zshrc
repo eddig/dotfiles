@@ -98,6 +98,30 @@ domain_lookup() {
   fi
 }
 
+# rcopy file.pdf dir/ → copies user@public-ip:/abs/path lines to the clipboard (OSC 52); run rpaste on the Mac
+# public IP comes from ipify, once per shell; set RCOPY_HOST to override (NAT, jump host, VPN)
+rcopy() {
+  local f ip
+  (( $# )) || { print -u2 "usage: rcopy PATH..."; return 1 }
+  for f; do
+    [[ -e $f ]] || { print -u2 "rcopy: no such file or directory: $f"; return 1 }
+  done
+  if [[ -z $RCOPY_HOST ]]; then
+    ip=$(curl -4 -fsS --max-time 3 https://api.ipify.org) &&
+      [[ $ip == <0-255>.<0-255>.<0-255>.<0-255> ]] ||
+      { print -u2 "rcopy: could not get public IP; set RCOPY_HOST"; return 1 }
+    RCOPY_HOST=$USER@$ip   # global: stays set for the rest of this shell session
+  fi
+  for f; do
+    print -r -- "$RCOPY_HOST:${f:A}"
+  done |
+  if [[ -n $TMUX ]]; then
+    tmux load-buffer -w -
+  else
+    printf '\e]52;c;%s\a' "$(base64 | tr -d '\n')"
+  fi
+}
+
 # ── fzf (fuzzy finder) ───────────────────────────────────────────────────────
 if command -v fzf >/dev/null 2>&1; then
   command -v fd >/dev/null 2>&1 && \

@@ -207,3 +207,14 @@ domain_lookup() {
     echo "$domain: $ip_address"
   fi
 }
+
+# rpaste [dest] → scp -r every host:/path from the clipboard (written by rcopy on the server) into dest (default: .)
+# rcopy is defined in linux/zshrc of this dotfiles repo
+rpaste() {
+  local -a srcs=("${(@f)$(pbpaste)}")
+  local s
+  for s in $srcs; do
+    [[ $s == ?*:/* ]] || { print -u2 "rpaste: clipboard is not host:/path: $s"; return 1 }
+  done
+  scp -r -- "${srcs[@]}" "${1:-.}"
+}
