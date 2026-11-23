@@ -9,10 +9,17 @@ DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 have() { command -v "$1" >/dev/null 2>&1; }
 log()  { printf '\n\033[1;34m==> %s\033[0m\n' "$*"; }
 
-# ── apt: Homebrew prerequisites + build toolchain only ───────────────────────
-log "apt prerequisites"
-sudo apt-get update -qq
-sudo apt-get install -y build-essential procps curl file git ca-certificates unzip
+# ── apt/dnf: Homebrew prerequisites + build toolchain only ───────────────────
+if have apt-get; then
+  log "apt prerequisites"
+  sudo apt-get update -qq
+  sudo apt-get install -y build-essential procps curl file git ca-certificates unzip
+elif have dnf; then
+  log "dnf prerequisites"
+  sudo dnf install -y @development-tools procps-ng gawk curl file git ca-certificates unzip
+else
+  echo "unsupported distro: need apt-get or dnf" >&2; exit 1
+fi
 
 # ── Homebrew (Linuxbrew) ─────────────────────────────────────────────────────
 if [ ! -x /home/linuxbrew/.linuxbrew/bin/brew ]; then
