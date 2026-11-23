@@ -142,3 +142,6 @@ fi
 
 command -v fnm >/dev/null 2>&1 && \
   eval "$(fnm env --use-on-cd --corepack-enabled --version-file-strategy recursive --shell zsh)"
+
+# Pass an unmatched glob to the command as text, as bash does (no "no matches found" error)
+setopt NO_NOMATCH
