@@ -1,7 +1,12 @@
 # oh-my-zsh
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="robbyrussell"
-plugins=(git zsh-autosuggestions fast-syntax-highlighting)
+# zoxide plugin: name of the jump command (e.g. `j proj`)
+ZOXIDE_CMD_OVERRIDE=j
+# fzf plugin: Ctrl-R history, Ctrl-T files, Alt-C cd, **<Tab> completion
+# fnm plugin: completions only — fnm env is initialized further down
+# fast-syntax-highlighting must be the last plugin
+plugins=(git fzf zoxide fnm zsh-autosuggestions fast-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
 
 # ── Remote-host indicator ────────────────────────────────────────────────────
